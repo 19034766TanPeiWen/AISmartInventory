@@ -1,0 +1,88 @@
+﻿@model List<Product>
+
+@section MoreScripts {
+    <link href="~/lib/datatables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#jsTable').DataTable({
+                ordering: true,
+                paging: true,
+                searching: true,
+                info: true,
+                lengthChange: true,
+                pageLength: 6
+
+
+            });
+        });
+    </script>
+
+
+}
+
+<h2>Products</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-@TempData["MsgType"]">
+        @TempData["Message"]
+    </div>
+}
+
+<table id="jsMovieTable" class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Description</th>
+            <th scope="col">Weight</th>
+            <th scope="col">Width</th>
+            <th scope="col">Height</th>
+            <th scope="col">Depth</th>
+            <th scope="col">Package</th>
+            <th scope="col">Category</th>
+            <th scope="col">Location</th>
+            <th scope="col">Reorder Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Product pd in Model)
+        {
+        <tr>
+            <td>@pd.Id</td>
+            <td>@pd.Description</td>
+            <td>@pd.Weight</td>
+            <td>@pd.Width</td>
+            <td>@pd.Height</td>
+            <td>@pd.Depth</td>
+            <td>@pd.Type</td>
+            <td>@pd.CategoryDescription</td>
+            <td>String.format("Isle:{0}<br />Shelf:{1}",@pd.Isle,@pd.Shelf)</td>
+            <td>@pd.ReorderQty</td>
+
+            <td>
+                <a asp-controller="Product"
+                   asp-action="EditProduct"
+                   asp-route-id="@pd.Id">
+                    <i class="fa fa-edit"></i>
+                </a> |
+                <a asp-controller="Product"
+                   asp-action="DeleteProduct"
+                   onclick="return confirm('Are you sure you want to delete: <@pd.Description>')">
+                    <i class="fa fa-trash-alt"></i>
+                </a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<body class="body">
+
+    <div class="container col-md-2">
+        <a asp-controller="Product"
+           asp-action="AddProduct">
+            <i class="fa fa-plus">Add Product</i>
+        </a>
+    </div>
+</body>

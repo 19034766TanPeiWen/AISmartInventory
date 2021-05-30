@@ -1,0 +1,112 @@
+﻿@model Product;
+
+<form asp-controller="Product"
+      asp-action="AddProduct"
+      method="post">
+
+    <div class="form-group row">
+        <div class="offset-sm-0 col-sm-6 ">
+            <h2>Add Product</h2>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="Description">Description :</label>
+        <div class="col-sm-5">
+            <input asp-for="Description" class="form-control" />
+        </div>
+        <div class="col-sm-4">
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="Weight">Weight :</label>
+        <div class="col-sm-5">
+            <input asp-for="Weight" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="Width">Width :</label>
+        <div class="col-sm-5">
+            <input asp-for="Width" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="Height">Height :</label>
+        <div class="col-sm-5">
+            <input asp-for="Height" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="Depth">Depth :</label>
+        <div class="col-sm-5">
+            <input asp-for="Depth" class="form-control" />
+        </div>     
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="PackageId">Package :</label>
+        <div class="col-sm-3">
+            <select class="form-control dropdown" asp-for="PackageId">
+                @foreach (Product row in ViewData["Package"] as List<Product>)
+                {
+                    <option value="@row.PackageId">
+                        @row.Type
+                    </option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="CategoryId">Category :</label>
+        <div class="col-sm-3">
+            <select class="form-control dropdown" asp-for="CategoryId">
+                @foreach (Product row in ViewData["Category"] as List<Product>)
+                {
+                    <option value="@row.CategoryId">
+                        @row.CategoryDescription
+                    </option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="LocationId">Location :</label>
+        <div class="col-sm-3">
+            <input asp-for="Isle" class="form-control" />
+            <input asp-for="Shelf" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="ReorderQty">Reorder Quantity:</label>
+        <div class="col-sm-2">
+            <input asp-for="ReorderQty" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="offset-sm-2 col-sm-6">
+            <input type="submit" value="Submit" class="btn btn-primary" />
+        </div>
+    </div>
+
+    @if (ViewData["Message"] != null)
+    {
+        <div class="form-group row">
+            <div class="offset-sm-2 col-sm-6">
+                <div class="alert alert-@ViewData["MsgType"]">
+                    <text>@Html.Raw(ViewData["Message"])</text>
+                </div>
+            </div>
+        </div>
+    }
+
+</form>
+

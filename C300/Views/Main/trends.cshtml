@@ -1,0 +1,55 @@
+﻿@model Product;
+<style>
+    .body {
+        background-image: linear-gradient(150deg,#FFFFFF,#DDF3FB);
+        height: 100vh;
+        width: 100%;
+    }
+    h1 {
+        font-family: Segoe Print;
+        text-align: center;
+    }
+
+    .form-group {
+        font-family: MV Boli;
+        text-align: right;
+    }
+</style>
+<body class="body">
+   
+    <div class="container">
+        <form asp-controller ="Main"
+              asp-action="trendsPost"
+              method="post">
+            <h1>Trends</h1>
+
+            <div class="form-group row">
+                <label class="control-label col-md-3" for="Display">Product Display:</label>
+                <div class="col-md-6">
+                    <select class="form-control checkbox" asp-for="Id">
+                        @foreach (Product row in ViewData["Category"] as List<Product>)
+                        {
+                            <option value="@row.Id">
+                                @row.Description
+                            </option>
+                        }
+                    </select>
+                </div>
+                <label class="control-label col-md-3" for="chart">Chart:</label>
+                <div class="col-md-6">
+                    <select class="form-control dropdown" name="Trends" id="trends">
+                        <option class="col-md-3" value="">-- SELECT --</option>
+                        <option class="col-md-3" value="pie">Pie</option>
+                        <option class="col-md-3" value="bar">Bar</option>
+                        <option class="col-md-3" value="line">Line</option>
+                    </select>
+                </div>
+                <div class="form-group row" style="text-align:left;font-family: Kristen ITC">
+                    <div class="offset-md-3 col-md-6">
+                        <input type="submit" class="btn btn-primary" value="Select" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>

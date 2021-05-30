@@ -1,0 +1,101 @@
+@model UserDetails
+@section MoreScripts {
+    <script src="~/lib/moment/moment.min.js"></script>
+    <link href="~/lib/dtpicker/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <script src="~/lib/dtpicker/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <script language="javascript">
+      $(document).ready(function () {
+         $('#JSDate')
+            .datetimepicker({ format: 'YYYY-MM-DD' });
+
+      });
+    </script>
+}
+
+<form asp-controller="Account"
+      asp-action="UserRegister"
+      method="post">
+
+    <div class="form-group row">
+        <div class="offset-sm-0 col-sm-4">
+            <h2>Register an Account</h2>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="EmployeeNo">Employee No :</label>
+        <div class="col-sm-4">
+            <input type="text" asp-for="EmployeeNo" class="form-control" />
+        </div>
+        <div class="col-sm-3">
+            <span asp-validation-for="EmployeeNo" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="LastName">Last Name :</label>
+        <div class="col-sm-4">
+            <input type="text" asp-for="LastName" class="form-control" />
+        </div>
+        <div class="col-sm-3">
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="GivenName">Given Name :</label>
+        <div class="col-sm-4">
+            <input type="text" asp-for="GivenName" class="form-control" />
+        </div>
+        <div class="col-sm-3">
+            <span asp-validation-for="GivenName" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="OtherNames">Other Names :</label>
+        <div class="col-sm-4">
+            <input type="text" asp-for="OtherNames" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="Dob">Dob :</label>
+        <div class="col-sm-5">
+            <div class="input-group date" id="JSDate" data-target-input="nearest">
+                <input type="text" asp-for="Dob" asp-format="{0:yyy-MM-dd}" class="form-control" />
+                <div class="input-group-append" data-target="#JSDate" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <span asp-validation-for="Dob" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="CompanyId">Company :</label>
+        <div class="col-sm-4">
+            <select asp-for="CompanyId" class="form-control" asp-items="@((SelectList)ViewData["Company"])"></select>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="offset-sm-2 col-sm-6">
+            <input type="submit" value="Register" class="btn btn-primary" />
+        </div>
+    </div>
+
+    @if (ViewData["Message"] != null)
+    {
+        <div class="form-group row">
+            <div class="alert alert-@ViewData["MsgType"]">
+                <text>@ViewData["Message"]</text>
+            </div>
+        </div>
+    }
+
+</form>
+

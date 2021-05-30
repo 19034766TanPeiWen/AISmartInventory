@@ -1,0 +1,111 @@
+﻿@model Product;
+
+<form asp-controller="Product"
+      asp-action="EditProduct"
+      method="post">
+
+    <div class="form-group row">
+        <div class="offset-sm-2 col-sm-6 ">
+            <h2>Edit Product</h2>
+        </div>
+    </div>
+
+    <input asp-for="Id" hidden />
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="Description">Description :</label>
+        <div class="col-sm-5">
+            <input class="form-control" asp-for="Description" readonly />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="Weight">Weight :</label>
+        <div class="col-sm-2">
+            <input class="form-control" asp-for="Weight" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="Width">Width :</label>
+        <div class="col-sm-2">
+            <input class="form-control" asp-for="Width" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="Height">Height :</label>
+        <div class="col-sm-2">
+            <input class="form-control" asp-for="Height" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="Depth">Depth :</label>
+        <div class="col-sm-2">
+            <input class="form-control" asp-for="Depth" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="Type">Package :</label>
+        <div class="col-sm-3">
+            <select asp-for="Type" class="form-control" asp-items="@((SelectList)ViewData["Package"])"></select>
+        </div>
+        <div class="col-sm-4">
+            <span asp-validation-for="Type" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="CategoryDescription">Category :</label>
+        <div class="col-sm-3">
+            <select asp-for="CategoryDescription" class="form-control" asp-items="@((SelectList)ViewData["Category"])"></select>
+        </div>
+        <div class="col-sm-4">
+            <span asp-validation-for="CategoryDescription" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="Isle">Isle :</label>
+        <div class="col-sm-3">
+            <input class="form-control" asp-for="Isle" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="Shelf">Shelf :</label>
+        <div class="col-sm-3">
+            <input class="form-control" asp-for="Shelf" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="ReorderQty">Reorder Quantity :</label>
+        <div class="col-sm-2">
+            <input class="form-control" asp-for="ReorderQty" />
+        </div>
+        <div class="col-sm-4">
+            <span asp-validation-for="ReorderQty" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="offset-sm-2 col-sm-6">
+            <input type="submit" value="Submit" class="btn btn-primary" />
+        </div>
+    </div>
+
+    @if (ViewData["Message"] != null)
+    {
+        <div class="form-group row">
+            <div class="offset-sm-2 col-sm-6">
+                <div class="alert alert-@ViewData["MsgType"]">
+                    <text>@Html.Raw(ViewData["Message"])</text>
+                </div>
+            </div>
+        </div>
+    }
+
+</form>

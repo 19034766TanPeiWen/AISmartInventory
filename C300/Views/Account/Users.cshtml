@@ -1,0 +1,39 @@
+@model List<UserDetails>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-@TempData["MsgType"]">
+        @TempData["Message"]
+    </div>
+}
+
+<h2>Members</h2>
+
+<table class="table table-condensed table-hover">
+    <tr>
+        <th scope="col">Employee No</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Given Name</th>
+        <th scope="col">Other Names</th>
+        <th scope="col">Dob</th>
+        <th scope="col">Trading As</th>
+        <th scope="col">Action</th>
+    </tr>
+    @foreach (UserDetails user in Model)
+    {
+<tr>
+    <td>@user.EmployeeNo</td>
+    <td>@user.LastName</td>
+    <td>@user.GivenName</td>
+    <td>@user.OtherNames</td>
+    <td>@user.Dob</td>
+    <td>@user.TradingAs</td>
+    <td>
+        <a asp-controller="Account"
+           asp-action="Delete"
+           asp-route-id="@user.Id"
+           onclick="return confirm('Delete User [@user.GivenName]')">Delete</a>
+    </td>
+</tr>
+    }
+</table>

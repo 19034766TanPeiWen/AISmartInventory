@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="AISmartInventory" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\RP\\Year\ 3\ Sem\ 1\\C300\\source\ code\\C300\\C300\\obj\\Release\\netcoreapp3\.1\\PubTmp\\Out\\$" />
+  </parameter>
+</parameters>

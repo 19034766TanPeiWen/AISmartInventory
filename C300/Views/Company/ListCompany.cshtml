@@ -1,0 +1,80 @@
+﻿@model List<Company>
+
+@section MoreScripts {
+    <link href="~/lib/datatables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#jsTable').DataTable({
+                ordering: true,
+                paging: true,
+                searching: true,
+                info: true,
+                lengthChange: true,
+                pageLength: 6
+
+
+            });
+        });
+    </script>
+
+
+}
+
+<h2>Company</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-@TempData["MsgType"]">
+        @TempData["Message"]
+    </div>
+}
+
+<table id="jsCompanyTable" class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Trading As</th>
+            <th scope="col">UEN</th>
+            <th scope="col">Incorporation Date</th>
+            <th scope="col">Registered Office</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Company com in Model)
+        {
+        <tr>
+            <td>@com.Id</td>
+            <td>@com.TradingAs</td>
+            <td>@com.UEN</td>
+            <td>@String.Format("{0:yyyy-MM-dd}", com.IncorporationDate)</td>
+            <td>@com.RegisteredOffice</td>
+           
+
+            <td>
+                <a asp-controller="Company"
+                   asp-action="EditCompany"
+                   asp-route-id="@com.Id">
+                    <i class="fa fa-edit"></i>
+                </a> |
+                <a asp-controller="Company"
+                   asp-action="DeleteCompany"
+                   asp-route-id="@com.Id"
+                   onclick="return confirm('Are you sure you want to delete: <@com.TradingAs>')">
+                    <i class="fa fa-trash-alt"></i>
+                </a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<body class="body">
+
+    <div class="container col-md-2">
+        <a asp-controller="Company"
+           asp-action="AddCompany">
+            <i class="fa fa-plus">Add Company</i>
+        </a>
+    </div>
+</body>
